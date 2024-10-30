@@ -21,9 +21,16 @@ function Logo() {
 
 function Form() {
   return (
-    <div className="add-form">
+    <form className="add-form">
       <h3>What do you need for your 😘 trip</h3>
-    </div>
+      <select>
+        {Array.from({ length: 20 }, (_, i) => i + 1).map((el) => (
+          <option value={el} key={el}>
+            {el}
+          </option>
+        ))}
+      </select>
+    </form>
   );
 }
 
@@ -32,7 +39,7 @@ function ParkingList() {
     <div className="list">
       <ul>
         {initialItems.map((item) => (
-          <Item item={item} />
+          <Item item={item} key={item.id} />
         ))}
       </ul>
     </div>
