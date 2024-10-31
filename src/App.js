@@ -9,6 +9,11 @@ const initialItems = [
 export default function App() {
   const [items, setItems] = useState([]);
 
+  function handleClearItems() {
+    const confirm = window.confirm("Are sure you want to clear the list ?");
+    if (confirm) setItems([]);
+  }
+
   function handleAddItem(item) {
     setItems((items) => [...items, item]);
   }
@@ -34,6 +39,7 @@ export default function App() {
         items={items}
         onDeleteItem={handleDeleteItem}
         onToggleItem={handleToggleItem}
+        onClearItems={handleClearItems}
       />
       <Stats items={items} />
     </div>
@@ -79,7 +85,7 @@ function Form({ items, onAddItem }) {
   );
 }
 
-function ParkingList({ items, onDeleteItem, onToggleItem }) {
+function ParkingList({ items, onDeleteItem, onToggleItem, onClearItems }) {
   const [sortBy, setSortBy] = useState("input");
 
   let sortedItems;
@@ -114,6 +120,7 @@ function ParkingList({ items, onDeleteItem, onToggleItem }) {
           <option value="description">Sort by description</option>
           <option value="packed">Sort by packed status</option>
         </select>
+        <button onClick={onClearItems}>Clear list</button>
       </div>
     </div>
   );
